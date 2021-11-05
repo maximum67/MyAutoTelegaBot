@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 
 public class logicBots {
+
     public static String BotResponse(String text) {
 
         HashMap<String, String> questions = new HashMap<>();
