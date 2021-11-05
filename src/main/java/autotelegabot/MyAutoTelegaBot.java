@@ -11,7 +11,7 @@ public class MyAutoTelegaBot {
     public static void main(String[] args) {
         //System.out.println("Hello AutoTelegaBot!");
 
-        TelegramBot bot = new TelegramBot("2131740608:AAFYlF1Ysm8XRaBIkPjpoc3wc7dM8qGVWAA");
+        TelegramBot bot = new TelegramBot("");
 
 
 
