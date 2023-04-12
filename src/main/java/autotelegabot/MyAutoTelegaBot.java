@@ -8,13 +8,14 @@ import com.pengrad.telegrambot.request.SendDocument;
 import com.pengrad.telegrambot.request.SendMessage;
 
 import java.io.File;
+import java.io.IOException;
 import java.time.LocalDate;
 
 
 public class MyAutoTelegaBot {
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         TelegramBot bot = new TelegramBot(new BotKey().getKey());
         KeyboardButton kb1 = new KeyboardButton("Вопрос");
@@ -47,6 +48,12 @@ public class MyAutoTelegaBot {
         request1.caption(dataFormat);
         bot.execute(request1);
 
+
+        try {
+            FtpDownloader.ftpDownlodFiles();
+        }catch (IOException e){
+
+        }
 
 
     }

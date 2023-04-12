@@ -2,18 +2,19 @@ package autotelegabot;
 
 import java.io.*;
 import java.nio.file.Files;
+
+
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-    public class FtpDownloader {
-//        static Logger logger
-//                = LoggerFactory.getLogger(FtpDownloader.class);
 
-        public static void main(String[] args)
-                throws IOException
-        {
+public class FtpDownloader {
+       static Logger logger
+                =  LoggerFactory.getLogger(FtpDownloader.class);
+
+        public static void ftpDownlodFiles() throws IOException {
 
             // create a instance of FtpConnector
             FtpConnector ftpConnector = new FtpConnector();
@@ -22,17 +23,19 @@ import org.slf4j.LoggerFactory;
             FTPClient ftpClient = ftpConnector.connect();
 
             // list all the files which will be downloaded.
-            FTPFile[] ftpFiles = ftpClient.listFiles();
+            FTPFile[] ftpFiles = ftpClient.listFiles("/123");
 
             // set downloading dir where all the files will be
             // stored on local directory.
             String downloading_dir
-                    = "/Downloads/FtpDownloaded/";
+                    = "/";
 
             for (FTPFile file : ftpFiles) {
+                System.out.println("File is downloaded : "+ file.getName());
                 File fileObj = new File(downloading_dir
                         + file.getName());
                 Files.createFile(fileObj.toPath());
+
                 try (OutputStream outputStream
                              = new BufferedOutputStream(
                         new FileOutputStream(fileObj))) {
@@ -43,8 +46,10 @@ import org.slf4j.LoggerFactory;
                     boolean isFileRetrieve
                             = ftpClient.retrieveFile(file.getName(),
                             outputStream);
-//                    logger.info("{} file is downloaded : {}",
+                    logger.info("{} file is downloaded : {}",
                             file.getName(), isFileRetrieve);
+                    System.out.println("File is downloaded : "+ file.getName());
+
                 }
             }
         }
