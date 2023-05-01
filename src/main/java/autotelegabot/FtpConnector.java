@@ -1,7 +1,9 @@
 package autotelegabot;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.UnknownHostException;
+import java.util.HashMap;
 
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
@@ -16,12 +18,16 @@ public class FtpConnector {
 
     public FTPClient connect() throws IOException
     {
+        HashMap<String,String> map = new HashMap<>();
+        map = FtpKey.getFtpKey();
+
+
         // Create an instance of FTPClient
         FTPClient ftpClient = new FTPClient();
         try {
             // establish a connection with specific host and
             // port.
-            ftpClient.connect("192.168.200.141", 21);
+            ftpClient.connect(map.get("host"), Integer.parseInt(map.get("port")));
 
             int replyCode = ftpClient.getReplyCode();
 
@@ -38,12 +44,12 @@ public class FtpConnector {
             // login to ftp server with username and
             // password.
             boolean success
-                    = ftpClient.login("aanki99", "Aspirin15");
+                    = ftpClient.login(map.get("login"), map.get("password"));
             if (!success) {
                 ftpClient.disconnect();
             }
             // assign file type according to the server.
-            ftpClient.setFileType(FTP.ASCII_FILE_TYPE );
+            ftpClient.setFileType(FTP.BINARY_FILE_TYPE );
             ftpClient.enterLocalPassiveMode();
 
             // change specific directory of ftp server from
