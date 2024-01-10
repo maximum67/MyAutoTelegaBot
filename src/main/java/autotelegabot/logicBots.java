@@ -11,6 +11,7 @@ public class logicBots {
         HashMap<String, String> questions = new HashMap<>();
         questions.put("привет", "hello");
         questions.put("зравствуй", "hello");
+        questions.put("зравствуйте", "hello");
         questions.put("добрый день", "hello");
         questions.put("добрый", "hello");
         questions.put("сколько стоит", "стоимость");
